@@ -5,6 +5,10 @@ pipeline {
         string(name: 'IMAGE_TAG', defaultValue: 'v1.0.10', description: 'Docker image version')
     }
 
+    environment {
+        ANSIBLE = "/opt/homebrew/bin/ansible-playbook"
+    }
+
     stages {
 
         stage('Checkout') {
@@ -16,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh """
-                ansible-playbook -i inventory playbooks/deploy.yml \
+                ${ANSIBLE} -i inventory playbooks/deploy.yml \
                 --extra-vars "image_tag=${params.IMAGE_TAG}"
                 """
             }
@@ -24,7 +28,7 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                sh "curl 54.160.200.28"
+                sh "curl http://54.160.200.28"
             }
         }
     }
