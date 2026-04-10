@@ -1,5 +1,6 @@
+---
 - name: Deploy FastAPI App
-  hosts: web
+  hosts: all
   become: yes
 
   tasks:
@@ -14,9 +15,27 @@
       service:
         name: docker
         state: started
+        enabled: true
+
+    - name: Stop existing container (if running)
+      command: docker stop fastapi-container
+      ignore_errors: yes
+
+    - name: Remove existing container (if exists)
+      command: docker rm fastapi-container
+      ignore_errors: yes
+
+    - name: Remove old images (optional cleanup)
+      command: docker image prune -f
+      ignore_errors: yes
 
     - name: Pull Docker image
       command: docker pull ciarancarden/fastapi-app:{{ image_tag }}
 
     - name: Run container
-      command: docker run -d -p 80:8000 ciarancarden/fastapi-app:{{ image_tag }}
+      command: >
+        docker run -d
+        --name fastapi-container
+        --platform linux/amd64
+        -p 80:8000
+        ciarancarden/fastapi-app:{{ image_tag }}
