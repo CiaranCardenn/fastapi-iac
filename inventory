@@ -1,2 +1,2 @@
 [web]
-100.53.180.209 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/DevOpsCW2Final.pem
+13.217.224.229 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/DevOpsCW2Final.pem

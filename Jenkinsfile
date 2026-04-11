@@ -7,6 +7,7 @@ pipeline {
 
     environment {
         ANSIBLE = "/opt/homebrew/bin/ansible-playbook"
+        EC2_IP = "13.217.224.229"
     }
 
     stages {
@@ -28,7 +29,10 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                sh "curl http://100.53.180.209"
+                sh """
+                echo "Checking app at http://${EC2_IP}"
+                curl --max-time 20 http://${EC2_IP}
+                """
             }
         }
     }
