@@ -1,2 +1,2 @@
 [web]
-13.217.224.229 ansible_user=ubuntu ansible_ssh_private_key_file=/Users/ciaran/.ssh/DevOpsCW2Final.pem
+100.27.225.110 ansible_user=ubuntu ansible_ssh_private_key_file=/Users/ciaran/.ssh/DevOpsCW2Final.pem
