@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         ANSIBLE = "/opt/homebrew/bin/ansible-playbook"
-        EC2_IP = "http://100.27.225.110"
+        EC2_IP = "100.27.225.110"
     }
 
     stages {
